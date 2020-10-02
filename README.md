@@ -15,13 +15,14 @@ install python mysql connector:
 `sudo apt-get install mysql-server`
 
 create the MySQL server user the python script will access the MySQL database with:
-> sudo mysql -u root
-> mysql> USE mysql;
-> mysql> CREATE USER '<YOUR_NEW_USERNAME>'@'localhost' IDENTIFIED BY '<YOUR_NEW_PASSWORD>';
-> mysql> GRANT ALL PRIVILEGES ON *.* TO '<YOUR_NEW_USERNAME>'@'localhost';
-> mysql> FLUSH PRIVILEGES;
-> mysql> exit;
-> service mysql restart
+```sudo mysql -u root
+mysql> USE mysql;
+mysql> CREATE USER '<YOUR_NEW_USERNAME>'@'localhost' IDENTIFIED BY '<YOUR_NEW_PASSWORD>';
+mysql> GRANT ALL PRIVILEGES ON *.* TO '<YOUR_NEW_USERNAME>'@'localhost';
+mysql> FLUSH PRIVILEGES;
+mysql> exit;
+service mysql restart
+```
 
 
 
