@@ -4,41 +4,33 @@ import requests
 import json
 import mysql.connector
 import sys
+from setup import connect_to_mysql_server
 
 
 
 HOSTNAME = 'localhost'
 DB_NAME = 'starwars_db'
+TABLE_NAME = 'Characters'
 
 
 
-def connect_to_mysql_server():
+''' get_starwars_table_data()
 
-	# parse arguments
-	parser = argparse.ArgumentParser()
-	parser.add_argument('-u', '--user',     help='username of mysql database')
-	parser.add_argument('-p', '--password', help='password to mysql database')
-	args = parser.parse_args()
+	Description:
+		Get the data from the table in the local MySQL database.
 
-	# connect to mysql server, abort if connection fails
-	conn = mysql.connector.connect(
-		host=HOSTNAME,
-		user=args.user,
-		password=args.password)
-	if conn == None:
-		print('Failed to connect to MySQL Server.')
-		sys.exit()
+	Arguments:
+		conn ..... CMySQLConnection ... connection to database (required: else weak connection error)
+		cursor ... CMySQLCursor ....... cursor object to interact with database
 
-	# set database
-	cursor = conn.cursor()
-	cursor.execute("USE %s" % DB_NAME)
-
-	return conn, cursor
-
-def get_starwars_table(conn, cursor):
+	Returns:
+		characters ... list of dictionaries ... each list element is a row in the table,
+		                                        each key is the column name, and the value is the table cell's value
+	'''
+def get_starwars_table_data(conn, cursor):
 
 	# get Characters table
-	cursor.execute("SELECT * FROM Characters")
+	cursor.execute("SELECT * FROM %s" % TABLE_NAME)
 	columns = [col[0] for col in cursor.description]
 	characters = [dict(zip(columns, row)) for row in cursor.fetchall()] # convert list of tuples to list of dicts
 
@@ -47,7 +39,23 @@ def get_starwars_table(conn, cursor):
 
 	return characters
 
-def output_films_and_characters(characters):
+''' output_films_and_characters()
+
+	Description:
+		Create a list of dictionaries of the films and characters
+		Print it to the console and return it.
+
+	Arguments:
+		characters ... list of dictionaries ... each list element is a row in the table,
+		                                        each key is the column name, and the value is the table cell's value
+		verbose ...... boolean ................ print the return values to the console.
+		                                        optional argument with default value of False
+
+	Returns:
+		output ... list of dictionaries ... each dictionary has key: film, value: list of character in that film
+
+	'''
+def output_films_and_characters(characters, verbose=False):
 	output = []
 	films = list(characters[0].keys())[2:]
 	for film_title in films:
@@ -57,22 +65,47 @@ def output_films_and_characters(characters):
 			'film'      : film_title.replace('_', ' '),
 			'character' : characters_in_film
 		})
-	print(json.dumps(output, indent=4))
+	if verbose:
+		print(json.dumps(output, indent=4))
+	return output
 
-def task_one():
+''' task_one()
+	
+	Description:
+		Connect to the MySQL database, get the data in the table,
+		and output and return the data.
+
+	Arguments:
+		username ... string .... optional argument with default value None. If None, parse from script arguments
+		pasword .... string .... optional argument with default value None. If None, parse from script arguments
+		verbose ... boolean ... print the return values to the console.
+		                        optional argument with default value of False
+
+	Returns:
+		output ... list of dictionaries ... each dictionary has key: film, value: list of character in that film
+		                                    returns None if failed to connect to database
+	'''
+def task_one(username=None, password=None, verbose=True):
 
 	# verify the argments provided connect to the mysql server
-	conn, cursor = connect_to_mysql_server()
+	conn, cursor = connect_to_mysql_server(
+		username=username,
+		password=password,
+		clear_db=False)
+	if conn == None or cursor == None:
+		return None
 
 	# get the data from the database
-	characters = get_starwars_table(conn, cursor)
+	characters = get_starwars_table_data(conn, cursor)
 
-	# print the data to the console
-	output_films_and_characters(characters)
+	# print and return the data to the console
+	output = output_films_and_characters(characters, verbose=verbose)
+	return output
 
 
 
 if __name__ == '__main__':
 
-	task_one()
+	output = task_one()
+
 

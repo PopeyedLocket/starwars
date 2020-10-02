@@ -14,7 +14,7 @@ install mysql:<br/>
 install python mysql connector:<br/>
 `sudo apt-get install mysql-server`
 
-create the MySQL server user the python script will access the MySQL database with:<br/>
+create the MySQL server username and password that the python script will use to access the database:<br/>
 ```
 sudo mysql -u root
 mysql> USE mysql;
@@ -29,7 +29,7 @@ service mysql restart
 
 ### Usage
 
-run setup.py to pull the data from ​https://swapi.dev/<br/>
+run setup.py to pull the data from ​https://swapi.dev/ and save it to database<br/>
 `python setup.py -u <YOUR_NEW_USERNAME> -p <YOUR_NEW_PASSWORD>`
 
 then run task_one.py to output a list of starwars films and which characters where in each film:<br/>
@@ -50,3 +50,26 @@ service mysql restart
 
 delete the github repo:<br/>
 `rm -rf /path/to/repo/starwars-characters/`
+
+
+### Testing
+
+Open starwars/tests/test_constants.py and change VALID_USERNAME and VALID_PASSWORD to <YOUR_NEW_USERNAME> and <YOUR_NEW_PASSWORD> respectively.
+
+run Unit Test with:<br/>
+```
+cd starwars/tests/
+coverage run function_unittests.py
+```
+
+Get Unittest Code Coverage with:<br/>
+```
+coverage report -m --include=/path/to/repo/src/*
+OR
+coverage report -m --include=../src/*
+```
+
+Run end-to-end Test with:<br/>
+`python project_end_to_end_tests.py`
+
+
