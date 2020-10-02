@@ -6,10 +6,10 @@ import mysql.connector
 import sys
 
 
+
 HOSTNAME = 'localhost'
 DB_NAME = 'starwars_db'
-FILMS_URL = 'https://swapi.dev/api/films/'
-CHARACTER_URL = 'https://swapi.dev/api/people/{character_index}/'
+
 
 
 def connect_to_mysql_server():
@@ -37,14 +37,17 @@ def connect_to_mysql_server():
 
 def get_starwars_tables(conn, cursor):
 
+	# get Characters table
 	cursor.execute("SELECT * FROM Characters")
 	columns = [col[0] for col in cursor.description]
 	characters = [dict(zip(columns, row)) for row in cursor.fetchall()] # convert list of tuples to list of dicts
 
+	# get Films table
 	cursor.execute("SELECT * FROM Films")
 	columns = [col[0] for col in cursor.description]
 	films = [dict(zip(columns, row)) for row in cursor.fetchall()]
 
+	# terminate connection
 	conn.close()
 
 	return characters, films
@@ -70,9 +73,12 @@ def task_one():
 	# get the data from the database
 	characters, films = get_starwars_tables(conn, cursor)
 
+	# print the data to the console
 	output_films_and_characters(films, characters)
+
 
 
 if __name__ == '__main__':
 
 	task_one()
+

@@ -6,10 +6,12 @@ import mysql.connector
 import sys
 
 
+
 HOSTNAME = 'localhost'
 DB_NAME = 'starwars_db'
 FILMS_URL = 'https://swapi.dev/api/films/'
 CHARACTER_URL = 'https://swapi.dev/api/people/{character_index}/'
+
 
 
 def connect_to_mysql_server():
@@ -90,19 +92,21 @@ def save_starwars_data(conn, cursor, characters, all_films):
 	conn.commit()
 	conn.close()
 
+def setup()
 
-
-if __name__ == '__main__':
-
-	# verify the argments provided connect to the mysql server
+	# verify the argments provided connect to the local mysql server
 	conn, cursor = connect_to_mysql_server()
 
 	# pull data from starwars API
 	characters, all_films = pull_starwars_data()
-	# # print(json.dumps(characters, indent=4))
-	# # print(json.dumps(all_films, indent=4))
 
 	# save data in mysql database
 	save_starwars_data(conn, cursor, characters, all_films)
+
+
+
+if __name__ == '__main__':
+
+	setup()
 
 
