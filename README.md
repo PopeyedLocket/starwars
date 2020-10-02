@@ -27,13 +27,10 @@ create the MySQL server user the python script will access the MySQL database wi
 
 ### Usage
 
-Run setup.py to pull the data from ​https://swapi.dev/
+run setup.py to pull the data from ​https://swapi.dev/
 `python setup.py -u <YOUR_NEW_USERNAME> -p <YOUR_NEW_PASSWORD>`
 
-ex:
-`python setup.py -u luke -p MbsuUtMMY2fN6Uq4`
-
-Then run task_one.py to output a list of films with which characters where in each film:
+then run task_one.py to output a list of films with which characters where in each film:
 ​`python task_one.py -u luke -p MbsuUtMMY2fN6Uq4`
 
 
