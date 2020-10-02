@@ -8,11 +8,11 @@ Red Hat Technical Assessment - Data Engineer
 clone github repo:<br/>
 `git clone git@github.com:PopeyedLocket/starwars-characters.git`
 
-install mysql:<br/>
+install mysql if not already installed:<br/>
 `sudo apt-get install mysql-server`
 
-install python mysql connector:<br/>
-`sudo apt-get install mysql-server`
+install python library requirements:<br/>
+`pip3 install -r requirements.txt`
 
 create the MySQL server username and password that the python script will use to access the database:<br/>
 ```
@@ -30,26 +30,14 @@ service mysql restart
 ### Usage
 
 run setup.py to pull the data from ​https://swapi.dev/ and save it to database<br/>
-`python setup.py -u <YOUR_NEW_USERNAME> -p <YOUR_NEW_PASSWORD>`
+```
+cd starwars/src/
+python setup.py -u <YOUR_NEW_USERNAME> -p <YOUR_NEW_PASSWORD>
+```
 
 then run task_one.py to output a list of starwars films and which characters where in each film:<br/>
 ​`python task_one.py -u luke -p MbsuUtMMY2fN6Uq4`
 
-
-
-### Uninstall
-
-delete the MySQL server user:<br/>
-```
-sudo mysql -u root
-mysql> USE mysql;
-mysql> DROP USER '<YOUR_NEW_USERNAME>'@'localhost'
-mysql> exit;
-service mysql restart
-```
-
-delete the github repo:<br/>
-`rm -rf /path/to/repo/starwars-characters/`
 
 
 ### Testing
@@ -72,4 +60,19 @@ coverage report -m --include=../src/*
 Run end-to-end Test with:<br/>
 `python project_end_to_end_tests.py`
 
+
+
+### Uninstall
+
+delete the MySQL server user:<br/>
+```
+sudo mysql -u root
+mysql> USE mysql;
+mysql> DROP USER '<YOUR_NEW_USERNAME>'@'localhost'
+mysql> exit;
+service mysql restart
+```
+
+delete the github repo:<br/>
+`rm -rf /path/to/repo/starwars/`
 
