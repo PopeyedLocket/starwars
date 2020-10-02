@@ -14,7 +14,7 @@ install mysql if not already installed:<br/>
 install python library requirements:<br/>
 `pip3 install -r requirements.txt`
 
-create the MySQL server username and password that the python script will use to access the database:<br/>
+create the username and password that the python script will use to access the MySQL server:<br/>
 ```
 sudo mysql -u root
 mysql> USE mysql;

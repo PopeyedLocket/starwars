@@ -4,13 +4,8 @@ import requests
 import json
 import mysql.connector
 import sys
+from constants import *
 from setup import connect_to_mysql_server
-
-
-
-HOSTNAME = 'localhost'
-DB_NAME = 'starwars_db'
-TABLE_NAME = 'Characters'
 
 
 
