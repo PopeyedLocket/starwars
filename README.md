@@ -12,7 +12,7 @@ install mysql if not already installed:<br/>
 `sudo apt-get install mysql-server`
 
 install python library requirements:<br/>
-`pip3 install -r requirements.txt`
+`pip3 install -r src/requirements.txt`
 
 create the username and password that the python script will use to access the MySQL server:<br/>
 ```
