@@ -25,7 +25,7 @@ create the MySQL server user the python script will access the MySQL database wi
 
 
 
-# Usage
+### Usage
 
 Run setup.py to pull the data from ​https://swapi.dev/
 `python setup.py -u <YOUR_NEW_USERNAME> -p <YOUR_NEW_PASSWORD>`
