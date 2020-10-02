@@ -1,10 +1,6 @@
 # starwars
 Red Hat Technical Assessment - Data Engineer
 
-`asdasdf<br/>
-zxcvzxcvz<br/>
-feytkjh<br/>
-nnnnn`
 
 
 ### Install
@@ -19,13 +15,13 @@ install python mysql connector:
 `sudo apt-get install mysql-server`
 
 create the MySQL server user the python script will access the MySQL database with:
-`sudo mysql -u root`
-`mysql> USE mysql;`
-`mysql> CREATE USER '<YOUR_NEW_USERNAME>'@'localhost' IDENTIFIED BY '<YOUR_NEW_PASSWORD>';`
-`mysql> GRANT ALL PRIVILEGES ON *.* TO '<YOUR_NEW_USERNAME>'@'localhost';`
-`mysql> FLUSH PRIVILEGES;`
-`mysql> exit;`
-`service mysql restart`
+`sudo mysql -u root`<br/>
+`mysql> USE mysql;`<br/>
+`mysql> CREATE USER '<YOUR_NEW_USERNAME>'@'localhost' IDENTIFIED BY '<YOUR_NEW_PASSWORD>';`<br/>
+`mysql> GRANT ALL PRIVILEGES ON *.* TO '<YOUR_NEW_USERNAME>'@'localhost';`<br/>
+`mysql> FLUSH PRIVILEGES;`<br/>
+`mysql> exit;`<br/>
+`service mysql restart`<br/>
 
 
 
