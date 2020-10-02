@@ -32,7 +32,7 @@ service mysql restart
 run setup.py to pull the data from ​https://swapi.dev/<br/>
 `python setup.py -u <YOUR_NEW_USERNAME> -p <YOUR_NEW_PASSWORD>`
 
-then run task_one.py to output a list of films with which characters where in each film:<br/>
+then run task_one.py to output a list of starwars films and which characters where in each film:<br/>
 ​`python task_one.py -u luke -p MbsuUtMMY2fN6Uq4`
 
 

@@ -35,34 +35,28 @@ def connect_to_mysql_server():
 
 	return conn, cursor
 
-def get_starwars_tables(conn, cursor):
+def get_starwars_table(conn, cursor):
 
 	# get Characters table
 	cursor.execute("SELECT * FROM Characters")
 	columns = [col[0] for col in cursor.description]
 	characters = [dict(zip(columns, row)) for row in cursor.fetchall()] # convert list of tuples to list of dicts
 
-	# get Films table
-	cursor.execute("SELECT * FROM Films")
-	columns = [col[0] for col in cursor.description]
-	films = [dict(zip(columns, row)) for row in cursor.fetchall()]
-
 	# terminate connection
 	conn.close()
 
-	return characters, films
+	return characters
 
-def output_films_and_characters(films, characters):
+def output_films_and_characters(characters):
 	output = []
-	for f_dct in films:
-		characters_in_film = []
-		for c_dct in characters:
-			films_with_character = list(map(lambda film_id : int(film_id), c_dct['films'].split(',')))
-			if f_dct['film_id'] in films_with_character:
-				characters_in_film.append(c_dct['name'])
+	films = list(characters[0].keys())[2:]
+	for film_title in films:
+		characters_in_film = list(filter(lambda c_dct : c_dct[film_title] == 1, characters))
+		characters_in_film = list(map(lambda c_dct : c_dct['name'], characters_in_film))
 		output.append({
-			'film'      : f_dct['title'],
-			'character' : characters_in_film})
+			'film'      : film_title.replace('_', ' '),
+			'character' : characters_in_film
+		})
 	print(json.dumps(output, indent=4))
 
 def task_one():
@@ -71,10 +65,10 @@ def task_one():
 	conn, cursor = connect_to_mysql_server()
 
 	# get the data from the database
-	characters, films = get_starwars_tables(conn, cursor)
+	characters = get_starwars_table(conn, cursor)
 
 	# print the data to the console
-	output_films_and_characters(films, characters)
+	output_films_and_characters(characters)
 
 
 
