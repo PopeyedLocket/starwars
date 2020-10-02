@@ -14,7 +14,7 @@ install mysql:<br/>
 install python mysql connector:<br/>
 `sudo apt-get install mysql-server`
 
-create the MySQL server user the python script will access the MySQL database with:
+create the MySQL server user the python script will access the MySQL database with:<br/>
 ```
 sudo mysql -u root
 mysql> USE mysql;
@@ -38,8 +38,9 @@ then run task_one.py to output a list of films with which characters where in ea
 
 
 ### Uninstall
+
+delete the MySQL server user:<br/>
 ```
-delete the MySQL server user:
 sudo mysql -u root
 mysql> USE mysql;
 mysql> DROP USER '<YOUR_NEW_USERNAME>'@'localhost'
